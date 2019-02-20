@@ -35,9 +35,9 @@ public class ArtistsController {
     @PutMapping("/artists/{id}")
     public Artist editArtist(@PathVariable Long id, @RequestBody Artist newArtist) {
         return repository.findById(id)
-                .map(employee -> {
-                    employee.setName(newArtist.getName());
-                    return repository.save(employee);
+                .map(artist -> {
+                    artist.setName(newArtist.getName());
+                    return repository.save(artist);
                 })
                 .orElseGet(() -> {
                     newArtist.setId(id);

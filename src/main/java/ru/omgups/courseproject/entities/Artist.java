@@ -1,10 +1,8 @@
 package ru.omgups.courseproject.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Artist {
@@ -13,11 +11,17 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
     private String name;
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    private Set<Album> albums;
 
     public Artist(String name) {
         this.name = name;
     }
+
+    protected Artist() {}
 
     public long getId() {
         return id;
