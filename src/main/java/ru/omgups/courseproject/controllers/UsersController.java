@@ -1,5 +1,6 @@
 package ru.omgups.courseproject.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.omgups.courseproject.entities.User;
 import ru.omgups.courseproject.exceptions.UserNotFoundException;
@@ -12,6 +13,7 @@ public class UsersController {
 
     private final UsersRepository repository;
 
+    @Autowired
     UsersController(UsersRepository repository) {
         this.repository = repository;
     }
