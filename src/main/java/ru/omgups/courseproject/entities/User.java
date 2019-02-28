@@ -5,11 +5,13 @@ import java.util.Objects;
 
 @Entity
 public class User {
-    protected User() {}
+    public User() {}
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     @Id
@@ -27,6 +29,12 @@ public class User {
 
     @Column
     private String email;
+
+    @Column
+    private String avatar;
+
+    @Column
+    private String role;
 
     public String getFirstName() {
         return firstName;
@@ -68,6 +76,14 @@ public class User {
         this.email = email;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,5 +106,13 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

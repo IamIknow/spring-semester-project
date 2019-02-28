@@ -18,16 +18,22 @@ public class Album {
 
     private String recordsLabel;
 
+    private String description;
+
+    private String coverUrl;
+
     @ManyToOne
     @JoinColumn
     private Artist artist;
 
-    public Album(String name, String genre, Date releaseDate, String recordsLabel, Artist artist) {
+    public Album(String name, String genre, Date releaseDate, String recordsLabel, Artist artist, String description, String coverUrl) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.recordsLabel = recordsLabel;
         this.artist = artist;
+        this.description = description;
+        this.coverUrl = coverUrl;
     }
 
     public Album() {
@@ -73,6 +79,14 @@ public class Album {
         this.artist = artist;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,5 +111,13 @@ public class Album {
                 ", releaseDate=" + releaseDate +
                 ", recordsLabel='" + recordsLabel + '\'' +
                 '}';
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 }

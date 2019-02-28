@@ -36,8 +36,8 @@ public class UsersControllerTest {
     @Before
     public void setup() {
         mockMvc = webAppContextSetup(webApplicationContext).build();
-        User mock1 = new User("John", "Doe");
-        User mock2 = new User("Ivan", "Ivanov");
+        User mock1 = new User("John", "Doe", "email", "123");
+        User mock2 = new User("Ivan", "Ivanov", "email", "123");
 
         repository.save(mock1);
         repository.save(mock2);
@@ -45,7 +45,7 @@ public class UsersControllerTest {
 
     @Test
     public void createUserTest() throws Exception {
-        User testUser = new User("John", "Doe");
+        User testUser = new User("John", "Doe", "email", "123");
         ResultActions perform = mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(gson.toJson(testUser)));
