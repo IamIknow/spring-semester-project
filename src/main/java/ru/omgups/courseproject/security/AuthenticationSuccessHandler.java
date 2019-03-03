@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
     private RequestCache requestCache = new HttpSessionRequestCache();
 
     @Override

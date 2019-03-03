@@ -42,6 +42,7 @@ public class Artist {
         this.name = name;
     }
 
+
     public String getPhotoUrl() {
         return photoUrl;
     }

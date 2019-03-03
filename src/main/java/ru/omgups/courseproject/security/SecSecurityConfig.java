@@ -51,6 +51,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/api/logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
+        http.headers().frameOptions().disable();
     }
 
     @Override

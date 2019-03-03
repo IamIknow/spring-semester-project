@@ -1,10 +1,14 @@
 package ru.omgups.courseproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties("reviews")
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +29,9 @@ public class Album {
     @ManyToOne
     @JoinColumn
     private Artist artist;
+
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     public Album(String name, String genre, Date releaseDate, String recordsLabel, Artist artist, String description, String coverUrl) {
         this.name = name;
@@ -87,6 +94,30 @@ public class Album {
         this.description = description;
     }
 
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,18 +137,15 @@ public class Album {
     @Override
     public String toString() {
         return "Album{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", genre='" + genre + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", recordsLabel='" + recordsLabel + '\'' +
+                ", description='" + description + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", artist=" + artist +
+                ", reviews=" + reviews +
                 '}';
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
     }
 }

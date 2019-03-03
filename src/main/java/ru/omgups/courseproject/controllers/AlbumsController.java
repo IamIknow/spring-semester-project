@@ -18,13 +18,13 @@ public class AlbumsController {
         this.albumsService = albumsService;
     }
 
-    @GetMapping("api/artists/{id}/albums")
-    public List<Album> getAlbums(@PathVariable Long id) {
+    @GetMapping("api/albums")
+    public List<Album> getAlbums() {
         return this.repository.findAll();
     }
 
-    @GetMapping("api/artists{artist-id}/albums/{id}")
-    public Album getAlbumById(@PathVariable Long id, @PathVariable("artist-id") Long artistId) {
+    @GetMapping("api/albums/{id}")
+    public Album getAlbumById(@PathVariable Long id) {
         return this.repository.findById(id)
                 .orElseThrow(() -> new AlbumNotFoundException(id));
     }

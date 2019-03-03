@@ -1,9 +1,13 @@
 package ru.omgups.courseproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties("reviews")
 public class User {
     public User() {}
 
@@ -35,6 +39,10 @@ public class User {
 
     @Column
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Review> reviews;
 
     public String getFirstName() {
         return firstName;
@@ -84,6 +92,22 @@ public class User {
         this.avatar = avatar;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,13 +134,5 @@ public class User {
                 ", avatar='" + avatar + '\'' +
                 ", role='" + role + '\'' +
                 '}';
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

@@ -24,4 +24,8 @@ public class AlbumsService {
 
         return albumsRepository.save(album);
     }
+
+    public Album getAlbumById(Long albumId) {
+        return albumsRepository.findById(albumId).orElseThrow(() -> new ArtistNotFoundException(albumId));
+    }
 }
