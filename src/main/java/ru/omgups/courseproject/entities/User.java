@@ -105,6 +105,10 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 

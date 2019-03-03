@@ -1,6 +1,9 @@
 package ru.omgups.courseproject.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.omgups.courseproject.dtos.UserDto;
@@ -25,23 +28,23 @@ public class UsersController {
         this.service = service;
     }
 
-    @RequestMapping("/users")
+    @RequestMapping("api/users")
     public List<User> getUsers() {
         return repository.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("api/users/{id}")
     public User getUserById(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    @PostMapping("/users")
+    @PostMapping("api/users")
     public User createUser(@RequestBody User newUser) {
         return repository.save(newUser);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("api/users/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User newUser) {
         return repository.findById(id)
                 .map(user -> {
@@ -54,18 +57,27 @@ public class UsersController {
                 });
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("api/users/{id}")
     public void deleteUser(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
-    @PostMapping("/users/registration")
-    public User registerUser(@Valid UserDto accountDto, BindingResult result) {
+    @PostMapping("api/users/registration")
+    public User registerUser(@Valid @RequestBody UserDto accountDto, BindingResult result) {
         User registered = null;
         if (!result.hasErrors()) {
             registered = createUserAccount(accountDto);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(registered, null, null);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            registered.setPassword(null);   //TODO Proper password hiding
         }
+
         return registered;
+    }
+
+    @GetMapping("api/users/current")
+    public User getCurrentUser() {
+        return (User) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     private User createUserAccount(UserDto accountDto) {

@@ -15,8 +15,12 @@ import java.util.List;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+    private final UsersRepository usersRepository;
+
     @Autowired
-    private UsersRepository usersRepository;
+    public MyUserDetailsService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -31,7 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
         boolean accountNonLocked = true;
         return  new org.springframework.security.core.userdetails.User
                 (user.getEmail(),
-                        user.getPassword().toLowerCase(), enabled, accountNonExpired,
+                        user.getPassword(), enabled, accountNonExpired,
                         credentialsNonExpired, accountNonLocked,
                         getAuthorities(user.getRole()));
     }

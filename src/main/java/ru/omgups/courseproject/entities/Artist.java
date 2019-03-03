@@ -14,6 +14,9 @@ public class Artist {
     @Column
     private String name;
 
+    @Column
+    private String photoUrl;
+
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private Set<Album> albums;
 
@@ -37,6 +40,14 @@ public class Artist {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ru.omgups.courseproject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.omgups.courseproject.dtos.UserDto;
 import ru.omgups.courseproject.entities.User;
@@ -10,10 +11,12 @@ import ru.omgups.courseproject.repositories.UsersRepository;
 @Service
 public class UsersService {
     private UsersRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersService(UsersRepository repository) {
+    public UsersService(UsersRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User registerNewUserAccount(UserDto accountDto) {
@@ -26,7 +29,7 @@ public class UsersService {
         User user = new User();
         user.setFirstName(accountDto.getFirstName());
         user.setLastName(accountDto.getLastName());
-        user.setPassword(accountDto.getPassword());
+        user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
         user.setRole("USER");
         return repository.save(user);

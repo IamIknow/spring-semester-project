@@ -16,23 +16,23 @@ public class ArtistsController {
         this.repository = repository;
     }
 
-    @GetMapping("/artists")
+    @GetMapping("api/artists")
     public List<Artist> getArtists() {
         return repository.findAll();
     }
 
-    @GetMapping("/artists/{id}")
+    @GetMapping("api/artists/{id}")
     public Artist getArtistById(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ArtistNotFoundException(id));
     }
 
-    @PostMapping("/artists")
+    @PostMapping("api/artists")
     public Artist createArtist(@RequestBody Artist newArtist) {
         return repository.save(newArtist);
     }
 
-    @PutMapping("/artists/{id}")
+    @PutMapping("api/artists/{id}")
     public Artist editArtist(@PathVariable Long id, @RequestBody Artist newArtist) {
         return repository.findById(id)
                 .map(artist -> {
