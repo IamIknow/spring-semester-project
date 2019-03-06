@@ -28,7 +28,7 @@ public class UsersController {
         this.service = service;
     }
 
-    @RequestMapping("api/users")
+    @GetMapping("api/users")
     public List<User> getUsers() {
         return repository.findAll();
     }
@@ -37,11 +37,6 @@ public class UsersController {
     public User getUserById(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    @PostMapping("api/users")
-    public User createUser(@RequestBody User newUser) {
-        return repository.save(newUser);
     }
 
     @PutMapping("api/users/{id}")
@@ -77,7 +72,11 @@ public class UsersController {
 
     @GetMapping("api/users/current")
     public User getCurrentUser() {
-        return (User) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User) {
+            return (User) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        } else {
+            return repository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        }
     }
 
     private User createUserAccount(UserDto accountDto) {

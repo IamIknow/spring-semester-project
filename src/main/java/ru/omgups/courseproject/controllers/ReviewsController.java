@@ -1,11 +1,8 @@
 package ru.omgups.courseproject.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.omgups.courseproject.dtos.ReviewDto;
-import ru.omgups.courseproject.entities.Album;
 import ru.omgups.courseproject.entities.Review;
 import ru.omgups.courseproject.services.ReviewsService;
 import ru.omgups.courseproject.services.UsersService;
