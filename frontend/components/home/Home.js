@@ -31,7 +31,6 @@ export default class Home extends Component {
         <Header currentUser={this.state.currentUser}/>
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
-            <CreateArtistForm/>
           </Grid.Column>
         </Grid>
       </div>

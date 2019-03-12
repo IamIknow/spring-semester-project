@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from "./components/router/AppRouter";
+import appReducer from './reducers/appReducer';
 
 import 'semantic-ui-css/semantic.min.css'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+export const AppDispatch = React.createContext(null);
 
-  render() {
-    return (
-      <AppRouter/>
-    );
-  }
+function App() {
+  const [state, dispatch] = useReducer(appReducer, {
+    auth: false,
+    currentUser: ''
+  });
+
+  return (
+    <AppDispatch.Provider value={{dispatch, state}}>
+      <AppRouter />
+    </AppDispatch.Provider>
+  );
 }
 
 ReactDOM.render(
