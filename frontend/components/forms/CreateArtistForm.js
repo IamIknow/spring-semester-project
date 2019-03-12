@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import {Button, Form, Segment, Message} from "semantic-ui-react";
+import axios from 'axios';
+
+export default class CreateArtistForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: null,
+      name: ''
+    };
+
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleFormChange(event, data) {
+    this.setState({
+      ...this.state,
+      name: data.value,
+    });
+  }
+
+  handleSubmit() {
+    axios.post('/api/artists', {
+      ...this.state
+    }).then(response => {
+      const name = response.data.name;
+      this.setState({
+        ...this.state,
+        message: `Artist ${name} successfully submitted`
+      });
+    });
+  }
+
+  render() {
+    return (
+      <div className={'create-artist-form'}>
+        <Form size='large'>
+          <Segment>
+            <Form.Input placeholder='Artist Name' onChange={this.handleFormChange} />
+            <Button color='teal' fluid size='large' onClick={this.handleSubmit}>
+              Submit
+            </Button>
+          </Segment>
+          <Message>
+            {this.state.message ? this.state.message : ''}
+          </Message>
+        </Form>
+      </div>
+    )
+  }
+}

@@ -45,7 +45,7 @@ public class ArtistsController {
                 });
     }
 
-    @DeleteMapping("/artists/{id}")
+    @DeleteMapping("/api/artists/{id}")
     void deleteArtist(@PathVariable Long id) {
         repository.deleteById(id);
     }

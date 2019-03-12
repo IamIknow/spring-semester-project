@@ -26,7 +26,7 @@ class Header extends Component {
 
     return (
       <div className={'header'}>
-        <Menu fixed='top' inverted>
+        <Menu inverted>
           <Container>
             <Link to={'/'}>
               <Menu.Item header>
@@ -34,7 +34,13 @@ class Header extends Component {
               </Menu.Item>
             </Link>
 
-            <Dropdown item simple text={`${firstName} ${lastName}`}>
+            <Link to={'/artists'}>
+              <Menu.Item>
+                Artists
+              </Menu.Item>
+            </Link>
+
+            <Dropdown item simple style={{ alignSelf: 'flex-end' }} text={`${firstName} ${lastName}`}>
               <Dropdown.Menu>
                 <Dropdown.Item>My Profile</Dropdown.Item>
                 <Dropdown.Item>My Reviews</Dropdown.Item>

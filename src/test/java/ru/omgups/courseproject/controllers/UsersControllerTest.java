@@ -2,6 +2,7 @@ package ru.omgups.courseproject.controllers;
 
 import com.google.gson.Gson;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,11 +80,13 @@ public class UsersControllerTest {
     @Test
     @WithMockUser
     public void getUserByIdTest() throws Exception {
-        ResultActions perform = mockMvc.perform(get("/api/users/1"));
+        User user = repository.save(new User("John", "Doe", "test@mail.com", "pass"));
+
+        ResultActions perform = mockMvc.perform(get("/api/users/" + user.getId()));
         perform.andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is("John")))
                 .andExpect(jsonPath("$.lastName", is("Doe")))
-                .andExpect(jsonPath("$.email", is("email1@mail.com")));
+                .andExpect(jsonPath("$.email", is("test@mail.com")));
     }
 
     @Test
