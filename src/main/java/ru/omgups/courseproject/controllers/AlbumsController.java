@@ -33,4 +33,14 @@ public class AlbumsController {
     public Album addAlbumForArtist(@PathVariable Long id, @RequestBody Album newAlbum) {
         return this.albumsService.addAlbumForArtist(id, newAlbum);
     }
+
+    @GetMapping("api/artists/{id}/albums")
+    public List<Album> getAlbumsForArtist(@PathVariable Long id) {
+        return this.albumsService.getAlbumsForArtist(id);
+    }
+
+    @DeleteMapping("api/albums/{id}")
+    public Album deleteAlbum(@PathVariable Long id) {
+        return this.albumsService.deleteAlbumById(id);
+    }
 }

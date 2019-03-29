@@ -5,6 +5,7 @@ import SignUpForm from "../forms/SignUpForm";
 import Home from "../home/Home";
 import PrivateRouter from "./PrivateRouter";
 import ArtistsList from '../artistsList/ArtistsList';
+import ArtistPage from "../artistPage/ArtistPage";
 
 export default (props) => {
   return (
@@ -13,7 +14,8 @@ export default (props) => {
         <PrivateRouter path={'/'} exact Render={Home}/>
         <Route path={'/login'} render={() => <LoginForm {...props}/>}/>
         <Route path={'/signup'} render={() => <SignUpForm {...props}/>}/>
-        <Route path={'/artists'} component={ArtistsList}/>
+        <Route exact path={'/artists/:id'} component={ArtistPage}/>
+        <Route exact path={'/artists'} component={ArtistsList}/>
       </Switch>
     </Router>
     );

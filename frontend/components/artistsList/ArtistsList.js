@@ -10,6 +10,7 @@ import ArtistsListItem from "../artistsListItem/ArtistsListItem";
 export default function ArtistList() {
   const { dispatch, state } = useContext(AppDispatch);
   const [ artists, setArtists ] = useState([]);
+  const [ newArtist, setNewArtist ] = useState(null);
 
   useEffect(() => {
     API.getCurrentUser(response => {
@@ -24,10 +25,14 @@ export default function ArtistList() {
     API.getArtistsList(response => {
       setArtists(response.data);
     });
-  }, []);
+  }, [newArtist]);
+
+  const handleDeleteArtist = (id) => {
+    setArtists(artists.filter(artist => artist.id !== id));
+  };
 
   const artistsList = artists.map((artist, index) => {
-    return <ArtistsListItem key={index} artist={artist}/>
+    return <ArtistsListItem key={index} artist={artist} onDelete={handleDeleteArtist}/>
   });
 
   return (
@@ -38,7 +43,7 @@ export default function ArtistList() {
           {
             state.currentUser && state.currentUser.role === 'ADMIN' &&
             <div className={'create-artist-form-container'}>
-              <CreateArtistForm/>
+              <CreateArtistForm artistAdditionCallback={(newArtist) => setNewArtist(newArtist)}/>
             </div>
           }
           <div className={'artists-list'}>

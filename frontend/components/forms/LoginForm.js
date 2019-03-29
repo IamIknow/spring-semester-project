@@ -62,8 +62,9 @@ class LoginForm extends Component {
             </Header>
             <Form size='large'>
               <Segment stacked>
-                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.handleFormChange} />
+                <Form.Input required fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.handleFormChange} />
                 <Form.Input
+                  required
                   fluid
                   icon='lock'
                   iconPosition='left'

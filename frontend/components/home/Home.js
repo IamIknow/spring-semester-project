@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Header from "../header/Header";
 import axios from 'axios';
-import CreateArtistForm from "../forms/CreateArtistForm";
-import {Grid} from "semantic-ui-react";
-import { Route } from "react-router-dom";
-import ArtistsList from '../artistsList/ArtistsList';
+import { Grid } from "semantic-ui-react";
 
 export default class Home extends Component {
   constructor(props) {

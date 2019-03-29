@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Form, Segment, Message} from "semantic-ui-react";
+import { Button, Form, Message, Segment } from "semantic-ui-react";
 import axios from 'axios';
 
 export default class CreateArtistForm extends Component {
@@ -8,7 +8,8 @@ export default class CreateArtistForm extends Component {
 
     this.state = {
       message: null,
-      name: ''
+      name: '',
+      error: ''
     };
 
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -23,6 +24,22 @@ export default class CreateArtistForm extends Component {
   }
 
   handleSubmit() {
+    const { artistAdditionCallback } = this.props;
+
+    if (!this.state.name.length) {
+      this.setState({
+        ...this.state,
+        error: 'name is required'
+      });
+
+      return;
+    } else {
+      this.setState({
+        ...this.state,
+        error: ''
+      });
+    }
+
     axios.post('/api/artists', {
       ...this.state
     }).then(response => {
@@ -31,6 +48,7 @@ export default class CreateArtistForm extends Component {
         ...this.state,
         message: `Artist ${name} successfully submitted`
       });
+      artistAdditionCallback(response.data.name);
     });
   }
 
@@ -39,7 +57,7 @@ export default class CreateArtistForm extends Component {
       <div className={'create-artist-form'}>
         <Form size='large'>
           <Segment>
-            <Form.Input placeholder='Artist Name' onChange={this.handleFormChange} />
+            <Form.Input placeholder='Artist Name' onChange={this.handleFormChange} error={!!this.state.error.length}/>
             <Button color='teal' fluid size='large' onClick={this.handleSubmit}>
               Submit
             </Button>

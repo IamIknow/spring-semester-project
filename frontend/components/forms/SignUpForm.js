@@ -76,10 +76,11 @@ class SignUpForm extends Component {
             </Header>
             <Form size='large'>
               <Segment stacked>
-                <Form.Input fluid icon='user' iconPosition='left' placeholder='First Name' onChange={this.handleFormChange} />
-                <Form.Input fluid icon='user' iconPosition='left' placeholder='Last Name' onChange={this.handleFormChange}/>
-                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.handleFormChange} />
+                <Form.Input required fluid icon='user' iconPosition='left' placeholder='First Name' onChange={this.handleFormChange} />
+                <Form.Input required fluid icon='user' iconPosition='left' placeholder='Last Name' onChange={this.handleFormChange}/>
+                <Form.Input required fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.handleFormChange} />
                 <Form.Input
+                  required
                   fluid
                   icon='lock'
                   iconPosition='left'
@@ -88,6 +89,7 @@ class SignUpForm extends Component {
                   onChange={this.handleFormChange}
                 />
                 <Form.Input
+                  required
                   fluid
                   icon='lock'
                   iconPosition='left'
