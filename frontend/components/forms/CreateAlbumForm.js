@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Message, Segment } from "semantic-ui-react";
+import { Button, Form, Segment } from "semantic-ui-react";
 import { postAlbum } from "../../api/api";
 
 export default class CreateAlbumForm extends Component {
@@ -65,9 +65,6 @@ export default class CreateAlbumForm extends Component {
               Submit
             </Button>
           </Segment>
-          <Message>
-            {this.state.message ? this.state.message : ''}
-          </Message>
         </Form>
       </div>
     );

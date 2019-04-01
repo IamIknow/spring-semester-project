@@ -30,7 +30,7 @@ class Header extends Component {
           <Container>
             <Link to={'/'}>
               <Menu.Item header>
-                Music Reviews App
+                Music Library App
               </Menu.Item>
             </Link>
 
@@ -42,9 +42,6 @@ class Header extends Component {
 
             <Dropdown item simple style={{ alignSelf: 'flex-end' }} text={`${firstName} ${lastName}`}>
               <Dropdown.Menu>
-                <Dropdown.Item>My Profile</Dropdown.Item>
-                <Dropdown.Item>My Reviews</Dropdown.Item>
-                <Dropdown.Divider />
                 <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

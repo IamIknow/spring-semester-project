@@ -3,7 +3,6 @@ package ru.omgups.courseproject.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public class Album {
 
     private String genre;
 
-    private Date releaseDate;
+    private String releaseDate;
 
     private String recordsLabel;
 
@@ -33,7 +32,7 @@ public class Album {
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-    public Album(String name, String genre, Date releaseDate, String recordsLabel, Artist artist, String description, String coverUrl) {
+    public Album(String name, String genre, String releaseDate, String recordsLabel, Artist artist, String description, String coverUrl) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
@@ -62,11 +61,11 @@ public class Album {
         this.genre = genre;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 

@@ -300,20 +300,15 @@ function ArtistPage(props) {
   var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_5__["AppDispatch"]),
       state = _useContext.state;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
-      currentUser = _useState2[0],
-      setCurrentUser = _useState2[1];
+      artist = _useState2[0],
+      setArtist = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      artist = _useState4[0],
-      setArtist = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      albums = _useState6[0],
-      setAlbums = _useState6[1];
+      albums = _useState4[0],
+      setAlbums = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     _api_api__WEBPACK_IMPORTED_MODULE_2__["getArtistById"](id, function (response) {
@@ -324,11 +319,6 @@ function ArtistPage(props) {
       });
     });
   }, [id]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    _api_api__WEBPACK_IMPORTED_MODULE_2__["getCurrentUser"](function (response) {
-      setCurrentUser(response.data);
-    });
-  }, []);
 
   var handleAddAlbum = function handleAddAlbum(_ref) {
     var data = _ref.data;
@@ -351,7 +341,7 @@ function ArtistPage(props) {
     });
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    currentUser: currentUser
+    currentUser: state.currentUser
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
     textAlign: "center",
     style: {
@@ -661,7 +651,7 @@ function (_Component) {
         fluid: true,
         size: "large",
         onClick: this.handleSubmit
-      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Message"], null, this.state.message ? this.state.message : '')));
+      }, "Submit"))));
     }
   }]);
 
@@ -1220,7 +1210,7 @@ function (_Component) {
         to: '/'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
         header: true
-      }, "Music Reviews App")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, "Music Library App")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: '/artists'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, null, "Artists")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
         item: true,
@@ -1229,7 +1219,7 @@ function (_Component) {
           alignSelf: 'flex-end'
         },
         text: "".concat(firstName, " ").concat(lastName)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Item, null, "My Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Item, null, "My Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Divider, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Item, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Menu, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"].Item, {
         onClick: this.handleLogout
       }, "Logout"))))));
     }

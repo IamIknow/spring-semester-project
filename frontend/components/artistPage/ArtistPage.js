@@ -14,7 +14,6 @@ function ArtistPage (props) {
 
   const { state } = useContext(AppDispatch);
 
-  const [currentUser, setCurrentUser] = useState('');
   const [artist, setArtist] = useState({});
   const [albums, setAlbums] = useState([]);
 
@@ -27,12 +26,6 @@ function ArtistPage (props) {
       });
     });
   }, [id]);
-
-  useEffect(() => {
-    API.getCurrentUser((response) => {
-      setCurrentUser(response.data)
-    });
-  }, []);
 
   const handleAddAlbum = ({ data }) => {
     setAlbums(albums.concat([data]));
@@ -48,7 +41,7 @@ function ArtistPage (props) {
 
   return (
     <>
-      <Header currentUser={currentUser}/>
+      <Header currentUser={state.currentUser}/>
       <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
           <div className={'artist-info'}>
